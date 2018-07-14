@@ -55,8 +55,8 @@ module.exports = {
           });
         }
         return expense
-          .update({
-            balance: req.body.balance || expense.balance
+          .update(req.body, {
+            fields: Object.keys(req.body)
           })
           .then(() => res.status(200).send(expense))
           .catch(error => res.status(400).send(error));
@@ -73,7 +73,9 @@ module.exports = {
         }
         return expense
           .destroy()
-          .then(() => res.status(204).send(expense))
+          .then(() =>
+            res.status(204).send({ message: "Account successfully deleted " })
+          )
           .catch(error => res.status(400).send(error));
       })
       .catch(error => res.status(400).send(error));
