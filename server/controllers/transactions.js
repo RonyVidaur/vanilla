@@ -6,7 +6,7 @@ module.exports = {
       title: req.body.title,
       amount: req.body.amount,
       type: req.body.type,
-      expenseId: req.body.expenseId
+      accountId: req.body.accountId
     })
       .then(transaction => res.status(201).send(transaction))
       .catch(error => res.status(400).send(error));
@@ -15,7 +15,7 @@ module.exports = {
     return Transaction.find({
       where: {
         id: req.params.transactionId,
-        expenseId: req.params.expenseId
+        accountId: req.params.accountId
       }
     })
       .then(transaction => {
@@ -35,7 +35,7 @@ module.exports = {
     return Transaction.find({
       where: {
         id: req.params.transactionId,
-        expenseId: req.params.expenseId
+        accountId: req.params.accountId
       }
     })
       .then(transaction => {

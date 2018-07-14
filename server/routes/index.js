@@ -1,4 +1,4 @@
-const expensesController = require("../controllers").expenses;
+const accountsController = require("../controllers").accounts;
 const transactionsController = require("../controllers").transactions;
 module.exports = app => {
   app.get("/api", (req, res) =>
@@ -7,26 +7,25 @@ module.exports = app => {
     })
   );
 
-  /* expenses - accounts */
-  app.post("/api/expenses", expensesController.create);
-  app.get("/api/expenses", expensesController.list);
-  app.get("/api/expenses/:expenseId", expensesController.retrieve);
-  app.put("/api/expenses/:expenseId", expensesController.update);
-  app.delete("/api/expenses/:expenseId", expensesController.destroy);
+  app.post("/api/accounts", accountsController.create);
+  app.get("/api/accounts", accountsController.list);
+  app.get("/api/accounts/:accountId", accountsController.retrieve);
+  app.put("/api/accounts/:accountId", accountsController.update);
+  app.delete("/api/accounts/:accountId", accountsController.destroy);
   app.post(
-    "/api/expenses/:expenseId/transactions",
+    "/api/accounts/:accountId/transactions",
     transactionsController.create
   );
   app.put(
-    "/api/expenses/:expenseId/transactions/:transactionId",
+    "/api/accounts/:accountId/transactions/:transactionId",
     transactionsController.update
   );
   app.delete(
-    "/api/expenses/:expenseId/transactions/:transactionId",
+    "/api/accounts/:accountId/transactions/:transactionId",
     transactionsController.destroy
   );
 
-  app.all("/api/expenses/:expenseId/transactions", (req, res) => {
+  app.all("/api/accounts/:accountId/transactions", (req, res) => {
     res.status(405).send({
       message: "Method Not Allowed"
     });

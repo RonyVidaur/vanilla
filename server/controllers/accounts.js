@@ -1,15 +1,15 @@
-const Expense = require("../models").Expense;
+const Account = require("../models").Account;
 const Transaction = require("../models").Transaction;
 module.exports = {
   create(req, res) {
-    return Expense.create({
+    return Account.create({
       balance: req.body.balance
     })
-      .then(expense => res.status(201).send(expense))
+      .then(account => res.status(201).send(account))
       .catch(error => res.status(400).send(error));
   },
   list(req, res) {
-    return Expense.findAll({
+    return Account.findAll({
       include: [
         {
           model: Transaction,
@@ -17,11 +17,11 @@ module.exports = {
         }
       ]
     })
-      .then(expenses => res.status(200).send(expenses))
+      .then(accounts => res.status(200).send(accounts))
       .catch(error => res.status(400).send(error));
   },
   retrieve(req, res) {
-    return Expense.findById(req.params.expenseId, {
+    return Account.findById(req.params.accountId, {
       include: [
         {
           model: Transaction,
@@ -29,18 +29,18 @@ module.exports = {
         }
       ]
     })
-      .then(expense => {
-        if (!expense) {
+      .then(account => {
+        if (!account) {
           return res.status(404).send({
             message: "Account not found"
           });
         }
-        return res.status(200).send(expense);
+        return res.status(200).send(account);
       })
       .catch(error => res.status(400).send(error));
   },
   update(req, res) {
-    return Expense.findById(req.params.expenseId, {
+    return Account.findById(req.params.account, {
       include: [
         {
           model: Transaction,
@@ -48,30 +48,30 @@ module.exports = {
         }
       ]
     })
-      .then(expense => {
-        if (!expense) {
+      .then(account => {
+        if (!account) {
           return res.status(404).send({
             message: "Account not found"
           });
         }
-        return expense
+        return account
           .update(req.body, {
             fields: Object.keys(req.body)
           })
-          .then(() => res.status(200).send(expense))
+          .then(() => res.status(200).send(account))
           .catch(error => res.status(400).send(error));
       })
       .catch(error => res.status(400).send(error));
   },
   destroy(req, res) {
-    return Expense.findById(req.params.expenseId)
-      .then(expense => {
-        if (!expense) {
+    return Account.findById(req.params.account)
+      .then(account => {
+        if (!account) {
           return res.status(404).send({
             message: "Account Not Found"
           });
         }
-        return expense
+        return account
           .destroy()
           .then(() =>
             res.status(204).send({ message: "Account successfully deleted " })

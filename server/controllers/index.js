@@ -1,6 +1,6 @@
-const expenses = require("./expenses");
+const accounts = require("./accounts");
 const transactions = require("./transactions");
 module.exports = {
-  expenses,
+  accounts,
   transactions
 };

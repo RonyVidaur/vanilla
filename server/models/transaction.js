@@ -7,7 +7,6 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: false
       },
-
       amount: {
         type: DataTypes.DOUBLE,
         allowNull: false
@@ -20,8 +19,8 @@ module.exports = (sequelize, DataTypes) => {
     {}
   );
   Transaction.associate = models => {
-    Transaction.belongsTo(models.Expense, {
-      foreignKey: "expenseId",
+    Transaction.belongsTo(models.Account, {
+      foreignKey: "accountId",
       onDelete: "CASCADE"
     });
   };
