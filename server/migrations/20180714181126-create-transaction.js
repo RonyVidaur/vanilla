@@ -8,6 +8,14 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
+      expensesId: {
+        type: Sequelize.INTEGER,
+        onDelete: 'CASCADE',
+        references: {
+          model: 'Expenses',
+          key: 'id',
+          as: 'expensesId',
+        },
       title: {
         type: Sequelize.STRING
       },
