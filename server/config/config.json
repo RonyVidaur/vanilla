@@ -3,8 +3,7 @@
     "username": "cgeggqay",
     "password": "UK030HKOk8fh8OfEGt4q-Jf3v6xPw6ZJ",
     "database": "cgeggqay",
-    "host":
-      "postgres://cgeggqay:UK030HKOk8fh8OfEGt4q-Jf3v6xPw6ZJ@baasu.db.elephantsql.com:5432/cgeggqay",
+    "host": "baasu.db.elephantsql.com",
     "dialect": "postgres"
   },
   "test": {

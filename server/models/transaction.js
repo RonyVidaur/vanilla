@@ -1,26 +1,17 @@
 "use strict";
 module.exports = (sequelize, DataTypes) => {
-  var Transaction = sequelize.define(
+  const Transaction = sequelize.define(
     "Transaction",
     {
-      title: {
-        type: DataTypes.STRING,
-        allowNull: false
-      },
-      amount: {
-        type: DataTypes.DOUBLE,
-        allowNull: false
-      },
-      type: {
-        type: DataTypes.INTEGER,
-        allowNull: false
-      }
+      title: DataTypes.STRING,
+      amount: DataTypes.DOUBLE,
+      type: DataTypes.INTEGER
     },
     {}
   );
   Transaction.associate = models => {
-    Transaction.belongsTo(models.Expenses, {
-      foreignKey: "expensesId",
+    Transaction.belongsTo(models.Expense, {
+      foreignKey: "expenseId",
       onDelete: "CASCADE"
     });
   };
