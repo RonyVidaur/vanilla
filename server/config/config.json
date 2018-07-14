@@ -1,17 +1,18 @@
 {
   "development": {
-    "username": "root",
-    "password": null,
-    "database": "database_development",
-    "host": "127.0.0.1",
-    "dialect": "mysql"
+    "username": "cgeggqay",
+    "password": "UK030HKOk8fh8OfEGt4q-Jf3v6xPw6ZJ",
+    "database": "cgeggqay",
+    "host":
+      "postgres://cgeggqay:UK030HKOk8fh8OfEGt4q-Jf3v6xPw6ZJ@baasu.db.elephantsql.com:5432/cgeggqay",
+    "dialect": "postgres"
   },
   "test": {
     "username": "root",
     "password": null,
     "database": "database_test",
     "host": "127.0.0.1",
-    "dialect": "mysql"
+    "dialect": "postgres"
   },
   "production": {
     "username": "root",
