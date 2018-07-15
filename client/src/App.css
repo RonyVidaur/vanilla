@@ -42,3 +42,26 @@ html {
 .right img {
   width: 300px;
 }
+
+.dashboard {
+  background-color: #f2f3f5;
+  height: calc(100vh - 52px);
+  padding: 20px;
+}
+
+.dashboard h1 {
+  font-size: 30px;
+}
+
+.dashboard h2 {
+  font-size: 22px;
+}
+
+.condensed-info {
+  display: flex;
+  width: 500px;
+  height: 50px;
+  vertical-align: center;
+  background-color: white;
+  border: 1px solid #cecece;
+}
