@@ -1,3 +1,47 @@
-.main-title-toolbar {
+html {
+  height: 100vh;
+  background: #06beb6; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to bottom,
+    #48b1bf,
+    #06beb6
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to bottom,
+    #48b1bf,
+    #06beb6
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.landing {
+  height: calc(100vh - 52px);
+  display: flex;
+  color: white;
+}
+
+.right {
+  width: 50%;
+  text-align: center;
+  padding-top: 10%;
+}
+
+.left {
+  padding-top: 15%;
+  width: 50%;
+  text-align: center;
+}
+
+.left h1 {
+  font-size: 36px;
+}
+
+.left h2 {
   font-size: 24px;
+  font-weight: 200;
+  margin-top: 5px;
+  margin-bottom: 10px;
+}
+
+.right img {
+  width: 300px;
 }
