@@ -1,13 +1,11 @@
 import React, { Component } from "react";
 import { Button } from "react-bulma-components/full";
 import transaction from "../assets/img/transaction.svg";
-import Toolbar from "./Toolbar";
 
 export default class Landing extends Component {
   render() {
     return (
       <div>
-        <Toolbar />
         <div className="landing">
           <div className="left">
             <h1>
