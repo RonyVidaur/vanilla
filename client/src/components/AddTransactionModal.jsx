@@ -29,9 +29,30 @@ export default class AddTransactionModal extends Component {
         <Modal show={this.state.show} onClose={this.close}>
           <Modal.Content>
             <Section style={{ backgroundColor: "white" }}>
-              Click on the "X" button on the top-right button to close the Modal
-              (pass closeOnEsc=false to the modal to avoid closing it with the
-              keyboard)
+              <div className="field">
+                <label className="label">Name</label>
+                <div className="control">
+                  <input className="input" />
+                </div>
+              </div>
+              <div className="field">
+                <label className="label">Amount</label>
+                <div className="control">
+                  <input className="input" />
+                </div>
+              </div>
+              <div className="field">
+                <label className="label">Transaction type</label>
+                <div className="control">
+                  <div className="select">
+                    <select>
+                      <option>Select an option</option>
+                      <option>Income</option>
+                      <option>Expense</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
             </Section>
           </Modal.Content>
         </Modal>
