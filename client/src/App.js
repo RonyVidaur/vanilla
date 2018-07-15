@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import Landing from "./components/Landing";
 import Dashboard from "./components/Dashboard";
 import Toolbar from "./components/Toolbar";
+import { Provider } from "react-redux";
+import store from "./store";
 import "./App.css";
 
 class App extends Component {
@@ -20,10 +22,12 @@ class App extends Component {
       view = <Dashboard />;
     }
     return (
-      <div>
-        <Toolbar />
-        {view}
-      </div>
+      <Provider store={store}>
+        <div>
+          <Toolbar />
+          {view}
+        </div>
+      </Provider>
     );
   }
 }
