@@ -1,9 +1,16 @@
 import React, { Component } from "react";
 import CondensedInfo from "./CondensedInfo";
-
+import TransactionList from "./TransactionList";
 export default class Dashboard extends Component {
   state = {
-    accounts: [{ id: 1, name: "Ficohsa", balance: 3000 }],
+    accounts: [
+      {
+        id: 1,
+        name: "Ficohsa",
+        balance: 3000,
+        transactions: [{ id: 1, title: "shoes", amount: 200 }]
+      }
+    ],
     currentDate: new Date().getDate(),
     currentUser: { firstName: "Rony", lastName: "Vidaur" }
   };
@@ -34,6 +41,7 @@ export default class Dashboard extends Component {
         <div className="info-holder">
           <CondensedInfo date={currentDate} />
         </div>
+        <TransactionList transactions={accounts[0].transactions} />
       </div>
     );
   }
