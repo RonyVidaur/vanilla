@@ -7,11 +7,7 @@ export default class Dashboard extends Component {
       {
         id: 1,
         name: "Ficohsa",
-        balance: 3000,
-        transactions: [
-          { id: 1, title: "shoes", amount: 50, type: "expense" },
-          { id: 2, title: "freelance", amount: "200", type: "income" }
-        ]
+        balance: 3000
       }
     ],
     currentDate: new Date().getDate(),
@@ -44,7 +40,7 @@ export default class Dashboard extends Component {
         <div className="info-holder">
           <CondensedInfo date={currentDate} />
         </div>
-        <TransactionList transactions={accounts[0].transactions} />
+        <TransactionList />
       </div>
     );
   }
