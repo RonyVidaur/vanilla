@@ -1,14 +1,13 @@
 import React, { Component } from "react";
 import Transaction from "./Transaction";
 import { Button } from "react-bulma-components/full";
+import { connect } from "react-redux";
+import { getTransactions } from "../actions/transactionActions";
 
-export default class TransactionList extends Component {
-  state = {
-    transactions: [
-      { id: 1, title: "shoes", amount: 50, type: "expense" },
-      { id: 2, title: "freelance", amount: "200", type: "income" }
-    ]
-  };
+class TransactionList extends Component {
+  componentDidMount() {
+    this.props.getTransactions();
+  }
   render() {
     const buttonStyle = {
       margin: "0 0 10px auto",
@@ -19,7 +18,7 @@ export default class TransactionList extends Component {
       flexDirection: "column",
       padding: "20px 150px"
     };
-    const transactions = this.state.transactions;
+    const { transactions } = this.props.transaction;
     return (
       <div style={listHolderStyle}>
         <Button
@@ -46,3 +45,10 @@ export default class TransactionList extends Component {
     );
   }
 }
+
+const mapStateToProps = state => ({ transaction: state.transaction });
+
+export default connect(
+  mapStateToProps,
+  { getTransactions }
+)(TransactionList);
