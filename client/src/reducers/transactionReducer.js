@@ -1,13 +1,12 @@
 import {
   GET_TRANSACTIONS,
   ADD_TRANSACTION,
-  DELETE_TRANSACTION
+  DELETE_TRANSACTION,
+  TRANSACTIONS_LOADING
 } from "../actions/types";
 const initialState = {
-  transactions: [
-    { id: 1, title: "shoes", amount: 50, type: "expense" },
-    { id: 2, title: "freelance", amount: "200", type: "income" }
-  ]
+  transactions: [],
+  loading: false
 };
 
 export default (state = initialState, action) => {
@@ -25,6 +24,11 @@ export default (state = initialState, action) => {
       return {
         ...state,
         transactions: [{ ...action.payload }, ...state.transactions]
+      };
+    case TRANSACTIONS_LOADING:
+      return {
+        ...state,
+        loading: true
       };
     default:
       return state;

@@ -5,7 +5,7 @@ export default class Transaction extends Component {
     return (
       <div
         className={`transaction ${
-          this.props.details.type === "expense" ? "red-border" : "green-border"
+          this.props.details.type === 1 ? "red-border" : "green-border"
         }`}
       >
         {this.props.children}
@@ -13,7 +13,7 @@ export default class Transaction extends Component {
         <p className="transaction-title">{this.props.details.title}</p>
         <p
           className={
-            this.props.details.type === "expense"
+            this.props.details.type === 1
               ? "transaction-amount red-text"
               : "transaction-amount green-text"
           }
