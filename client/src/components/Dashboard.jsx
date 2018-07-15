@@ -8,7 +8,10 @@ export default class Dashboard extends Component {
         id: 1,
         name: "Ficohsa",
         balance: 3000,
-        transactions: [{ id: 1, title: "shoes", amount: 200 }]
+        transactions: [
+          { id: 1, title: "shoes", amount: 50, type: "expense" },
+          { id: 2, title: "freelance", amount: "200", type: "income" }
+        ]
       }
     ],
     currentDate: new Date().getDate(),
