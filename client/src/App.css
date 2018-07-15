@@ -101,3 +101,28 @@ html {
   font-weight: 800;
   color: #cccfd0;
 }
+
+.user-info {
+  display: flex;
+}
+
+.dashboard-left {
+  width: 50%;
+}
+
+.dashboard-right {
+  text-align: right;
+  width: 50%;
+}
+
+.text {
+  font-weight: bold;
+}
+
+.green-text {
+  color: #3bd584;
+}
+
+.red-text {
+  color: #eb4356;
+}
