@@ -15,6 +15,7 @@ export default class Toolbar extends Component {
                 width="60"
                 height="auto"
               />
+              <h1 className="main-title-toolbar">Vanilla</h1>
             </Navbar.Item>
             <Navbar.Burger />
           </Navbar.Brand>
