@@ -1,14 +1,53 @@
 import React, { Component } from "react";
 import { Button, Modal, Section } from "react-bulma-components/full";
 import { connect } from "react-redux";
-// import { addTransaction } from "../actions/transactionActions";
-export default class AddTransactionModal extends Component {
+import { addTransaction } from "../actions/transactionActions";
+class AddTransactionModal extends Component {
   state = {
-    show: false
+    show: false,
+    options: [
+      {
+        name: "Expense",
+        value: 1
+      },
+      {
+        name: "Income",
+        value: 2
+      }
+    ],
+    type: 1
   };
   open = () => this.setState({ show: true });
   close = () => this.setState({ show: false });
+  onChange = e => {
+    this.setState({ [e.target.name]: e.target.value });
+  };
+  optionChange = event => {
+    this.setState({ type: event.target.value });
+  };
+  handleSubmit = () => {
+    if (this.state.type && this.state.title && this.state.amount) {
+      let newTransaction = {
+        id: 132,
+        type: this.state.type,
+        title: this.state.title,
+        amount: this.state.amount
+      };
+      this.props.addTransaction(newTransaction);
+      this.close();
+    } else {
+      this.setState({
+        isShowingError: true
+      });
+    }
+  };
   render() {
+    const { options, type } = this.state;
+    const error = this.state.isShowingError ? (
+      <p className="red-text">*please fill all the fields</p>
+    ) : (
+      ""
+    );
     return (
       <div
         style={{
@@ -27,38 +66,72 @@ export default class AddTransactionModal extends Component {
           Add Transaction
         </Button>
         <Modal show={this.state.show} onClose={this.close}>
-          <Modal.Content>
-            <Section style={{ backgroundColor: "white" }}>
-              <div className="field">
-                <label className="label">Name</label>
-                <div className="control">
-                  <input className="input" />
-                </div>
-              </div>
-              <div className="field">
-                <label className="label">Amount</label>
-                <div className="control">
-                  <input className="input" />
-                </div>
-              </div>
-              <div className="field">
-                <label className="label">Transaction type</label>
-                <div className="control">
-                  <div className="select">
-                    <select>
-                      <option>Select an option</option>
-                      <option>Income</option>
-                      <option>Expense</option>
-                    </select>
+          <Modal.Card
+            style={{ padding: "100px" }}
+            modal={{ closeOnBlur: true }}
+          >
+            <Modal.Card.Head>
+              <Modal.Card.Title>Add a new transaction</Modal.Card.Title>
+            </Modal.Card.Head>
+            <Modal.Card.Body>
+              <Section style={{ backgroundColor: "white" }}>
+                {error}
+                <div className="field">
+                  <label className="label">Title</label>
+                  <div className="control">
+                    <input
+                      className="input"
+                      name="title"
+                      onChange={this.onChange}
+                    />
                   </div>
                 </div>
-              </div>
-            </Section>
-          </Modal.Content>
+                <div className="field">
+                  <label className="label">Amount</label>
+                  <div className="control">
+                    <input
+                      className="input"
+                      type="number"
+                      name="amount"
+                      onChange={this.onChange}
+                    />
+                  </div>
+                </div>
+                <div className="field">
+                  <label className="label">Transaction type</label>
+                  <div className="control">
+                    <div className="select">
+                      <select onChange={this.optionChange} value={type}>
+                        {options.map(item => (
+                          <option key={item.value} value={item.value}>
+                            {item.name}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </Section>
+              <Section>
+                <Button
+                  onClick={this.handleSubmit}
+                  style={{ width: "100%" }}
+                  className="is-primary"
+                >
+                  Save
+                </Button>
+              </Section>
+            </Modal.Card.Body>
+          </Modal.Card>
         </Modal>
       </div>
     );
   }
 }
-
-// export default connect()(TransactionModal);
+const mapStateToprops = state => ({
+  transaction: state.transaction
+});
+export default connect(
+  mapStateToprops,
+  { addTransaction }
+)(AddTransactionModal);

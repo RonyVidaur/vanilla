@@ -25,7 +25,7 @@ class TransactionList extends Component {
     const { transactions } = this.props.transaction;
     return (
       <div style={listHolderStyle}>
-        <AddTransactionModal />
+        <AddTransactionModal modal={{ closeOnBlur: true }} />
         {transactions.map(transaction => {
           return (
             <Transaction details={{ ...transaction }}>
