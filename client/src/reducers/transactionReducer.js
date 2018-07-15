@@ -12,7 +12,11 @@ const initialState = {
 export default (state = initialState, action) => {
   switch (action.type) {
     case GET_TRANSACTIONS:
-      return { ...state };
+      return {
+        ...state,
+        transactions: action.payload,
+        loading: false
+      };
     case DELETE_TRANSACTION:
       return {
         ...state,
