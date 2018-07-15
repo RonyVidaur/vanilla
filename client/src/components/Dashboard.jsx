@@ -15,7 +15,9 @@ export default class Dashboard extends Component {
           Hi <strong>{currentUser.firstName}</strong>,
         </h1>
         <h2>See where you spend your money</h2>
-        <CondensedInfo date={currentDate} />
+        <div className="info-holder">
+          <CondensedInfo date={currentDate} />
+        </div>
       </div>
     );
   }
