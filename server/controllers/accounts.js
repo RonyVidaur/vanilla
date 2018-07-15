@@ -3,6 +3,7 @@ const Transaction = require("../models").Transaction;
 module.exports = {
   create(req, res) {
     return Account.create({
+      name: req.body.name,
       balance: req.body.balance
     })
       .then(account => res.status(201).send(account))
