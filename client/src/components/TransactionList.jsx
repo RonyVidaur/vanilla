@@ -16,7 +16,7 @@ export default class TransactionList extends Component {
     };
     const listHolderStyle = {
       display: "flex",
-      "flex-direction": "column",
+      flexDirection: "column",
       padding: "20px 150px"
     };
     const transactions = this.state.transactions;
