@@ -59,9 +59,27 @@ html {
 
 .condensed-info {
   display: flex;
-  width: 500px;
+  width: 75%;
   height: 50px;
   vertical-align: center;
   background-color: white;
   border: 1px solid #cecece;
+  border-radius: 5px;
+}
+
+.condensed-info .date-holder {
+  height: 100%;
+  width: 20%;
+  background: #06beb6;
+  color: white;
+  text-align: center;
+  font-size: 16px;
+  vertical-align: center;
+}
+
+.condensed-info .expense-holder {
+  height: 100%;
+  width: 40%;
+  text-align: center;
+  border-right: 1px solid #f2f3f5;
 }
