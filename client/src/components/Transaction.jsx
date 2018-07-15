@@ -8,7 +8,7 @@ export default class Transaction extends Component {
           this.props.details.type === "expense" ? "red-border" : "green-border"
         }`}
       >
-        {this.children}
+        {this.props.children}
         <span>category goes here</span>
         <p className="transaction-title">{this.props.details.title}</p>
         <p

@@ -2,13 +2,20 @@ import React, { Component } from "react";
 import Transaction from "./Transaction";
 import { Button } from "react-bulma-components/full";
 import { connect } from "react-redux";
-import { getTransactions } from "../actions/transactionActions";
+import {
+  getTransactions,
+  deleteTransaction
+} from "../actions/transactionActions";
 
 class TransactionList extends Component {
   componentDidMount() {
     this.props.getTransactions();
   }
   render() {
+    const onDelete = id => {
+      console.log("deleting ", id);
+      this.props.deleteTransaction(id);
+    };
     const buttonStyle = {
       margin: "0 0 10px auto",
       width: "150px"
@@ -39,7 +46,16 @@ class TransactionList extends Component {
           Add Transaction
         </Button>
         {transactions.map(transaction => {
-          return <Transaction details={{ ...transaction }} />;
+          return (
+            <Transaction details={{ ...transaction }}>
+              <Button
+                className="is-small is-danger"
+                onClick={onDelete.bind(this, transaction.id)}
+              >
+                X
+              </Button>
+            </Transaction>
+          );
         })}
       </div>
     );
@@ -50,5 +66,5 @@ const mapStateToProps = state => ({ transaction: state.transaction });
 
 export default connect(
   mapStateToProps,
-  { getTransactions }
+  { getTransactions, deleteTransaction }
 )(TransactionList);

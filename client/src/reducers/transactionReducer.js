@@ -14,6 +14,13 @@ export default (state = initialState, action) => {
   switch (action.type) {
     case GET_TRANSACTIONS:
       return { ...state };
+    case DELETE_TRANSACTION:
+      return {
+        ...state,
+        transactions: state.transactions.filter(transaction => {
+          return transaction.id !== action.payload;
+        })
+      };
     default:
       return state;
   }
