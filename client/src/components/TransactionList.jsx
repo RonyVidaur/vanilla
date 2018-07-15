@@ -14,7 +14,6 @@ class TransactionList extends Component {
   }
   render() {
     const onDelete = id => {
-      console.log("deleting ", id);
       this.props.deleteTransaction(id);
     };
     const listHolderStyle = {
