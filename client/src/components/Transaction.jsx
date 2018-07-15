@@ -3,10 +3,18 @@ import React, { Component } from "react";
 export default class Transaction extends Component {
   render() {
     return (
-      <div className="transaction">
+      <div className="transaction green-border">
         <span>category goes here</span>
-        <p>{this.props.details.title}</p>
-        <p>{this.props.details.amount}</p>
+        <p className="transaction-title">{this.props.details.title}</p>
+        <p
+          className={
+            this.props.details.type === "expense"
+              ? "transaction-amount red-text"
+              : "transaction-amount green-text"
+          }
+        >
+          $ {this.props.details.amount}
+        </p>
       </div>
     );
   }

@@ -126,3 +126,35 @@ html {
 .red-text {
   color: #eb4356;
 }
+
+.transaction {
+  display: flex;
+  width: 75%;
+  height: 50px;
+  margin: 15px auto 0 12.5%;
+  vertical-align: center;
+  background-color: white;
+  box-shadow: 0 2px 10px 0 #e7e7e7;
+  border-radius: 5px;
+  padding: 12px;
+}
+
+.red-border {
+  border-right: 4px solid #eb4356;
+}
+
+.green-border {
+  border-right: 4px solid #3bd584;
+}
+
+.transaction .transaction-title {
+  color: #36393e;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.transaction .transaction-amount {
+  font-weight: 800;
+  margin-right: 25px;
+  margin-left: auto;
+}
