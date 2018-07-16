@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Tag } from "react-bulma-components/full";
 
 export default class Transaction extends Component {
   render() {
@@ -9,8 +10,9 @@ export default class Transaction extends Component {
         }`}
       >
         {this.props.children}
-        <span>category goes here</span>
-        <p className="transaction-title">{this.props.details.title}</p>
+        <p style={{ marginLeft: "20px" }} className="transaction-title">
+          {this.props.details.title}
+        </p>
         <p
           className={
             this.props.details.type === 1
@@ -18,7 +20,10 @@ export default class Transaction extends Component {
               : "transaction-amount green-text"
           }
         >
-          $ {this.props.details.amount}
+          <Tag color="primary">{this.props.details.tag || "transaction"}</Tag>
+          <span style={{ marginLeft: "10px" }}>
+            $ {this.props.details.amount}
+          </span>
         </p>
       </div>
     );
