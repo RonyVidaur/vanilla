@@ -16,12 +16,16 @@ export const getTransactions = () => dispatch => {
   });
 };
 
-export const deleteTransaction = id => {
-  return { type: DELETE_TRANSACTION, payload: id };
+export const deleteTransaction = id => dispatch => {
+  axios.delete(`/api/accounts/1/transactions/${id}`).then(response => {
+    dispatch({ type: DELETE_TRANSACTION, payload: id });
+  });
 };
 
-export const addTransaction = transaction => {
-  return { type: ADD_TRANSACTION, payload: transaction };
+export const addTransaction = transaction => dispatch => {
+  axios.post("/api/accounts/1/transactions", transaction).then(response => {
+    dispatch({ type: ADD_TRANSACTION, payload: response.data });
+  });
 };
 
 export const setItemsLoading = () => {

@@ -31,7 +31,8 @@ class AddTransactionModal extends Component {
         id: 132,
         type: this.state.type,
         title: this.state.title,
-        amount: this.state.amount
+        amount: this.state.amount,
+        accountId: 1
       };
       this.props.addTransaction(newTransaction);
       this.close();
