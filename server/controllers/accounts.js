@@ -41,7 +41,7 @@ module.exports = {
       .catch(error => res.status(400).send(error));
   },
   update(req, res) {
-    return Account.findById(req.params.account, {
+    return Account.findById(req.params.accountId, {
       include: [
         {
           model: Transaction,
