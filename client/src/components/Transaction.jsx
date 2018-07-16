@@ -10,6 +10,9 @@ export default class Transaction extends Component {
         }`}
       >
         {this.props.children}
+        <Tag style={{ marginLeft: "20px" }}>
+          {this.props.details.tag || "transaction"}
+        </Tag>
         <p style={{ marginLeft: "20px" }} className="transaction-title">
           {this.props.details.title}
         </p>
@@ -20,9 +23,8 @@ export default class Transaction extends Component {
               : "transaction-amount green-text"
           }
         >
-          <Tag color="primary">{this.props.details.tag || "transaction"}</Tag>
           <span style={{ marginLeft: "10px" }}>
-            $ {this.props.details.amount}
+            $ {this.props.details.amount.toFixed(2)}
           </span>
         </p>
       </div>

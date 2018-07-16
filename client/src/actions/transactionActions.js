@@ -2,7 +2,8 @@ import {
   GET_TRANSACTIONS,
   ADD_TRANSACTION,
   DELETE_TRANSACTION,
-  TRANSACTIONS_LOADING
+  TRANSACTIONS_LOADING,
+  GET_TOTAL_INCOME
 } from "./types";
 import axios from "axios";
 
@@ -26,6 +27,10 @@ export const addTransaction = transaction => dispatch => {
   axios.post("/api/accounts/1/transactions", transaction).then(response => {
     dispatch({ type: ADD_TRANSACTION, payload: response.data });
   });
+};
+
+export const getTotalIncome = () => dispatch => {
+  dispatch({ type: GET_TOTAL_INCOME });
 };
 
 export const setItemsLoading = () => {
