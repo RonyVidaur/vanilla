@@ -10,9 +10,7 @@ export default class Transaction extends Component {
         }`}
       >
         {this.props.children}
-        <Tag style={{ marginLeft: "20px" }}>
-          {this.props.details.tag || "transaction"}
-        </Tag>
+        <Tag style={{ marginLeft: "20px" }}>{this.props.details.tag}</Tag>
         <p style={{ marginLeft: "20px" }} className="transaction-title">
           {this.props.details.title}
         </p>

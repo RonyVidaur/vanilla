@@ -6,7 +6,8 @@ module.exports = {
       title: req.body.title,
       amount: req.body.amount,
       type: req.body.type,
-      accountId: req.body.accountId
+      accountId: req.body.accountId,
+      tag: req.body.tag
     })
       .then(transaction => res.status(201).send(transaction))
       .catch(error => res.status(400).send(error));

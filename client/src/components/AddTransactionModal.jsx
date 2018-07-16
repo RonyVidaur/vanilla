@@ -28,10 +28,10 @@ class AddTransactionModal extends Component {
   handleSubmit = () => {
     if (this.state.type && this.state.title && this.state.amount) {
       let newTransaction = {
-        id: 132,
         type: this.state.type,
         title: this.state.title,
         amount: this.state.amount,
+        tag: this.state.tag,
         accountId: 1
       };
       this.props.addTransaction(newTransaction);
@@ -94,6 +94,17 @@ class AddTransactionModal extends Component {
                       className="input"
                       type="number"
                       name="amount"
+                      onChange={this.onChange}
+                    />
+                  </div>
+                </div>
+                <div className="field">
+                  <label className="label">Tag</label>
+                  <div className="control">
+                    <input
+                      className="input"
+                      type="text"
+                      name="tag"
                       onChange={this.onChange}
                     />
                   </div>

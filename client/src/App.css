@@ -45,7 +45,7 @@ html {
 
 .dashboard {
   background-color: #f2f3f5;
-  height: calc(100vh - 52px);
+  min-height: calc(100vh - 52px);
   padding: 40px;
 }
 
