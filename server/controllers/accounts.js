@@ -65,7 +65,7 @@ module.exports = {
       .catch(error => res.status(400).send(error));
   },
   destroy(req, res) {
-    return Account.findById(req.params.account)
+    return Account.findById(req.params.accountId)
       .then(account => {
         if (!account) {
           return res.status(404).send({
