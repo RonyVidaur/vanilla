@@ -9,6 +9,7 @@ module.exports = app => {
 
   app.post("/api/accounts", accountsController.create);
   app.get("/api/accounts", accountsController.list);
+  app.get("/api/accounts/:accountId/transactions", transactionsController.list);
   app.get("/api/accounts/:accountId", accountsController.retrieve);
   app.put("/api/accounts/:accountId", accountsController.update);
   app.delete("/api/accounts/:accountId", accountsController.destroy);

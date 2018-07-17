@@ -11,7 +11,7 @@ let testAccountId;
 
 describe("accounts", () => {
   beforeEach(done => {
-    Account.remove({}, err => {
+    Account.destroy({}, err => {
       done();
     });
   });

@@ -6,11 +6,23 @@ module.exports = {
       title: req.body.title,
       amount: req.body.amount,
       type: req.body.type,
-      accountId: req.body.accountId,
+      accountId: req.params.accountId,
       tag: req.body.tag
     })
       .then(transaction => res.status(201).send(transaction))
       .catch(error => res.status(400).send(error));
+  },
+  list(req, res) {
+    return Transaction.findAll({
+      where: {
+        accountId: req.params.accountId
+      }
+    }).then(transactions => {
+      if (!transactions) {
+        return res.status(404).send({ message: "No Transactions Found" });
+      }
+      return res.status(200).send(transactions);
+    });
   },
   update(req, res) {
     return Transaction.find({
