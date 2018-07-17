@@ -7,6 +7,7 @@ module.exports = app => {
     })
   );
 
+  // API routes
   app.post("/api/accounts", accountsController.create);
   app.get("/api/accounts", accountsController.list);
   app.get("/api/accounts/:accountId/transactions", transactionsController.list);
@@ -25,6 +26,10 @@ module.exports = app => {
     "/api/accounts/:accountId/transactions/:transactionId",
     transactionsController.destroy
   );
+
+  // OAuth routes
+  app.get("auth/login/google", (req, res) => {});
+  app.get("auth/logout", (req, res) => {});
 
   app.all("/api/accounts/:accountId/transactions", (req, res) => {
     res.status(405).send({
