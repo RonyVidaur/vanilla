@@ -7,12 +7,50 @@ let should = chai.should();
 let expect = chai.expect;
 
 chai.use(chaiHttp);
+let testAccountId;
 
 describe("accounts", () => {
   beforeEach(done => {
     Account.remove({}, err => {
       done();
     });
+  });
+});
+
+describe("/POST an Account", () => {
+  it("Should NOT POST an account without a name", done => {
+    let account = {
+      balance: 2000
+    };
+    chai
+      .request(server)
+      .post("/api/accounts")
+      .send(account)
+      .end((err, res) => {
+        res.should.have.status(400);
+        res.body.should.be.a("object");
+        res.body.errors[0].should.have
+          .property("message")
+          .eql("Account.name cannot be null");
+        done();
+      });
+  });
+  it("Should POST an account if all data is valid", done => {
+    let account = {
+      name: "test account",
+      balance: 100
+    };
+    chai
+      .request(server)
+      .post("/api/accounts")
+      .send(account)
+      .end((err, res) => {
+        should.not.exist(err);
+        res.should.have.status(201);
+        expect(res.body).to.be.a("object");
+        testAccountId = res.body.id;
+        done();
+      });
   });
 });
 
@@ -35,10 +73,10 @@ describe("/GET Account", () => {
         done();
       });
   });
-  it("Should get an specific", done => {
+  it("Should get an specific account", done => {
     chai
       .request(server)
-      .get("/api/accounts/1")
+      .get(`/api/accounts/${testAccountId}`)
       .end((err, res) => {
         should.not.exist(err);
         res.should.have.status(200);
@@ -46,38 +84,58 @@ describe("/GET Account", () => {
         done();
       });
   });
-});
-
-describe("/POST an Account", () => {
-  it("Should NOT POST an account without a name", done => {
-    let account = {
-      balance: 2000
-    };
+  it("Should return error on unexistent account", done => {
     chai
       .request(server)
-      .post("/api/accounts")
-      .send(account)
+      .get("/api/accounts/21312")
       .end((err, res) => {
-        res.should.have.status(400);
+        res.should.have.status(404);
         res.body.should.be.a("object");
-        res.body.errors[0].should.have
-          .property("message")
-          .eql("Account.name cannot be null");
+        expect(res.body).be.eql({ message: "Account not found" });
         done();
       });
   });
-  it("Should POST an account", done => {
-    let account = {
-      name: "test account",
-      balance: 100
+});
+
+describe("/PUT update an account", () => {
+  it("Should update an account", done => {
+    let changes = {
+      balance: 8000
     };
     chai
       .request(server)
-      .post("/api/accounts")
-      .send(account)
+      .put(`/api/accounts/${testAccountId}`)
+      .send(changes)
       .end((err, res) => {
-        res.should.have.status(201);
-        expect(res.body).to.be.a("object");
+        res.should.have.status(200);
+        res.body.balance.should.equal(changes.balance);
+        done();
+      });
+  });
+  it("Should NOT UPDATE a non existent account", done => {
+    let changes = {
+      name: "New Account"
+    };
+    chai
+      .request(server)
+      .put("/api/accounts/9087")
+      .send(changes)
+      .end((err, res) => {
+        res.should.have.status(404);
+        res.body.should.be.a("object");
+        res.body.should.have.property("message").eql("Account not found");
+        done();
+      });
+  });
+});
+
+describe("/DELETE an account", () => {
+  it("Should delete an account", done => {
+    chai
+      .request(server)
+      .delete(`/api/accounts/${testAccountId}`)
+      .end((err, res) => {
+        res.should.have.status(204);
         done();
       });
   });
