@@ -136,6 +136,17 @@ describe("/DELETE an account", () => {
       .delete(`/api/accounts/${testAccountId}`)
       .end((err, res) => {
         res.should.have.status(204);
+        res.body.should.be.a("object");
+        done();
+      });
+  });
+  it("should return an error when deleting a non existent account", done => {
+    chai
+      .request(server)
+      .delete("/api/accounts/12345567")
+      .end((err, res) => {
+        res.should.have.status(404);
+        res.body.should.have.property("message").eql("Account Not Found");
         done();
       });
   });
