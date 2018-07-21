@@ -18,7 +18,11 @@ module.exports = (sequelize, DataTypes) => {
   Account.associate = models => {
     Account.hasMany(models.Transaction, {
       foreignKey: "accountId",
-      as: "transactions"
+      as: "account"
+    });
+    Account.belongsTo(models.User, {
+      foreignKey: "userId",
+      onDelete: "CASCADE"
     });
   };
   return Account;
