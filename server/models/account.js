@@ -18,7 +18,7 @@ module.exports = (sequelize, DataTypes) => {
   Account.associate = models => {
     Account.hasMany(models.Transaction, {
       foreignKey: "accountId",
-      as: "account"
+      as: "transactions"
     });
     Account.belongsTo(models.User, {
       foreignKey: "userId",

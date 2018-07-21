@@ -1,19 +1,36 @@
 const accountsController = require("../controllers").accounts;
 const transactionsController = require("../controllers").transactions;
+const usersController = require("../controllers").users;
+const passport = require("passport");
+
 module.exports = app => {
-  app.get("/api", (req, res) =>
+  const authCheck = (req, res, next) => {
+    !req.user
+      ? res.status(400).send({ message: "Unauthorized Request" })
+      : next();
+  };
+
+  app.get("/api", authCheck, (req, res) =>
     res.status(200).send({
       message: "Accounts API"
     })
   );
 
-  // API routes
-  app.post("/api/accounts", accountsController.create);
-  app.get("/api/accounts", accountsController.list);
-  app.get("/api/accounts/:accountId/transactions", transactionsController.list);
-  app.get("/api/accounts/:accountId", accountsController.retrieve);
-  app.put("/api/accounts/:accountId", accountsController.update);
-  app.delete("/api/accounts/:accountId", accountsController.destroy);
+  //API routes
+  app.post("/api/users/:userId/accounts/", accountsController.create);
+  app.get("/api/users/:userId/account/", accountsController.list);
+  app.get("/api/users", usersController.list);
+  app.get("/api/users/:userId", usersController.retrieve);
+  app.post("/api/users/:userId/accounts", accountsController.create);
+  app.get(
+    "/api/users/:userId/account/:accountId/transactions",
+    transactionsController.list
+  );
+  app.get(
+    "/api/users/:userId/accounts/:accountId",
+    accountsController.retrieve
+  );
+  app.put("/api/users/:userId/accounts/:accountId", accountsController.update);
   app.post(
     "/api/accounts/:accountId/transactions",
     transactionsController.create
@@ -28,7 +45,17 @@ module.exports = app => {
   );
 
   // OAuth routes
-  app.get("auth/login/google", (req, res) => {});
+  app.get(
+    "/google",
+    passport.authenticate("google", {
+      scope: ["profile"]
+    })
+  );
+
+  app.get("/google/redirect", passport.authenticate("google"), (req, res) => {
+    res.redirect("http://facebook.com");
+  });
+
   app.get("auth/logout", (req, res) => {});
 
   app.all("/api/accounts/:accountId/transactions", (req, res) => {

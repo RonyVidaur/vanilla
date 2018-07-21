@@ -1,16 +1,21 @@
 const Account = require("../models").Account;
 const Transaction = require("../models").Transaction;
+const User = require("../models").User;
 module.exports = {
   create(req, res) {
     return Account.create({
       name: req.body.name,
-      balance: req.body.balance
+      balance: req.body.balance,
+      userId: req.body.userId
     })
       .then(account => res.status(201).send(account))
       .catch(error => res.status(400).send(error));
   },
   list(req, res) {
     return Account.findAll({
+      where: {
+        id: req.params.userId
+      },
       include: [
         {
           model: Transaction,
