@@ -7,25 +7,12 @@ import store from "./store";
 import "./App.css";
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      isLoggedIn: true
-    };
-  }
   render() {
-    const isLoggedIn = this.state.isLoggedIn;
-    let view;
-    if (!isLoggedIn) {
-      view = <Landing />;
-    } else {
-      view = <Dashboard />;
-    }
     return (
       <Provider store={store}>
         <div>
           <Toolbar />
-          {view}
+          <Dashboard />
         </div>
       </Provider>
     );

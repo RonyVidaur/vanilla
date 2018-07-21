@@ -2,19 +2,21 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 class CondensedInfo extends Component {
   render() {
-    const { transactions } = this.props.transaction;
+    const { transactions } = this.props.transaction || [];
     const totalAmount = type => {
-      return transactions
-        .filter(transaction => {
-          return transaction.type === type;
-        })
-        .map(element => {
-          return element.amount || 0;
-        })
-        .reduce((acc, currVal) => {
-          return acc + currVal;
-        }, 0)
-        .toFixed(2);
+      return (
+        transactions
+          .filter(transaction => {
+            return transaction.type === type;
+          })
+          .map(element => {
+            return element.amount || 0;
+          })
+          .reduce((acc, currVal) => {
+            return acc + currVal;
+          }, 0)
+          .toFixed(2) || 0
+      );
     };
     const totalIncome = totalAmount(2);
     const totalExpenses = totalAmount(1);

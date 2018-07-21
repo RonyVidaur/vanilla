@@ -6,7 +6,7 @@ module.exports = {
     return Account.create({
       name: req.body.name,
       balance: req.body.balance,
-      userId: req.body.userId
+      userId: req.user.id
     })
       .then(account => res.status(201).send(account))
       .catch(error => res.status(400).send(error));
@@ -14,7 +14,7 @@ module.exports = {
   list(req, res) {
     return Account.findAll({
       where: {
-        id: req.params.userId
+        id: req.user.id
       },
       include: [
         {

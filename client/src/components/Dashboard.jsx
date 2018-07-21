@@ -3,13 +3,6 @@ import CondensedInfo from "./CondensedInfo";
 import TransactionList from "./TransactionList";
 export default class Dashboard extends Component {
   state = {
-    accounts: [
-      {
-        id: 1,
-        name: "Ficohsa",
-        balance: 3000
-      }
-    ],
     currentDate: new Date().getDate(),
     currentUser: { firstName: "Rony", lastName: "Vidaur" }
   };

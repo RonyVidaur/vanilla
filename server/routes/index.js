@@ -17,8 +17,8 @@ module.exports = app => {
   );
 
   //API routes
-  app.post("/api/users/:userId/accounts/", accountsController.create);
-  app.get("/api/users/:userId/account/", accountsController.list);
+  app.get("/api/user/accounts/", accountsController.list);
+  // app.get("/api/users/:userId/account/", accountsController.list);
   app.get("/api/users", usersController.list);
   app.get("/api/users/:userId", usersController.retrieve);
   app.post("/api/users/:userId/accounts", accountsController.create);
@@ -31,16 +31,13 @@ module.exports = app => {
     accountsController.retrieve
   );
   app.put("/api/users/:userId/accounts/:accountId", accountsController.update);
-  app.post(
-    "/api/accounts/:accountId/transactions",
-    transactionsController.create
-  );
+  app.post("/api/user/accounts/transactions", transactionsController.create);
   app.put(
     "/api/accounts/:accountId/transactions/:transactionId",
     transactionsController.update
   );
   app.delete(
-    "/api/accounts/:accountId/transactions/:transactionId",
+    "/api/user/accounts/transactions/:transactionId",
     transactionsController.destroy
   );
 

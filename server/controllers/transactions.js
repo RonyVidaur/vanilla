@@ -6,7 +6,7 @@ module.exports = {
       title: req.body.title,
       amount: req.body.amount,
       type: req.body.type,
-      accountId: req.params.accountId,
+      accountId: req.body.accountId,
       tag: req.body.tag
     })
       .then(transaction => res.status(201).send(transaction))
@@ -48,7 +48,7 @@ module.exports = {
     return Transaction.find({
       where: {
         id: req.params.transactionId,
-        accountId: req.params.accountId
+        accountId: req.user.id
       }
     })
       .then(transaction => {

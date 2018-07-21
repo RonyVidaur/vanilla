@@ -9,22 +9,23 @@ import axios from "axios";
 
 export const getTransactions = () => dispatch => {
   dispatch(setItemsLoading());
-  axios.get("/api/accounts/1/").then(response => {
+  axios.get("/api/user/accounts/").then(response => {
+    console.log(response.data);
     dispatch({
       type: GET_TRANSACTIONS,
-      payload: response.data.transactions
+      payload: response.data[0].transactions
     });
   });
 };
 
 export const deleteTransaction = id => dispatch => {
-  axios.delete(`/api/accounts/1/transactions/${id}`).then(response => {
+  axios.delete(`/api/user/accounts/transactions/${id}`).then(response => {
     dispatch({ type: DELETE_TRANSACTION, payload: id });
   });
 };
 
 export const addTransaction = transaction => dispatch => {
-  axios.post("/api/accounts/1/transactions", transaction).then(response => {
+  axios.post("/api/user/accounts/transactions", transaction).then(response => {
     dispatch({ type: ADD_TRANSACTION, payload: response.data });
   });
 };
