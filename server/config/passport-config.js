@@ -8,7 +8,7 @@ passport.serializeUser((user, done) => {
 });
 
 passport.deserializeUser((id, done) => {
-  models.User.findById(id).then(user => {
+  models.User.findOne({ where: { id: id } }).then(user => {
     done(null, user);
   });
 });
@@ -27,14 +27,24 @@ passport.use(
         gender: profile.gender,
         googleId: profile.id
       };
-      models.User.findOrCreate({
-        where: { ...user }
-      }).spread((userResult, created) => {
-        if (created) {
-          done(null, user);
-        } else {
-          done(null, userResult);
-        }
+
+      models.sequelize.transaction(function(t) {
+        return models.User.findOrCreate({
+          where: { googleId: profile.id },
+          defaults: { ...user },
+          transaction: t
+        }).spread((userResult, created) => {
+          if (created) {
+            models.Account.create({
+              name: "main",
+              balance: 0,
+              userId: profile.id
+            });
+            done(null, user);
+          } else {
+            done(null, userResult);
+          }
+        });
       });
     }
   )

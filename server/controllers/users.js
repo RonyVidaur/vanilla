@@ -26,14 +26,17 @@ module.exports = {
       .catch(error => res.status(400).send(error));
   },
   retrieve(req, res) {
-    return User.findById(req.params.userId, {
-      include: [
-        {
-          model: Account,
-          as: "account"
-        }
-      ]
-    })
+    return User.findOne(
+      { where: { googleId: req.user.googleId } },
+      {
+        include: [
+          {
+            model: Account,
+            as: "account"
+          }
+        ]
+      }
+    )
       .then(user => {
         if (!user) {
           return res.status(404).send({

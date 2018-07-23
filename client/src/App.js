@@ -1,11 +1,11 @@
 import React, { Component } from "react";
-import Landing from "./components/Landing";
+
 import Dashboard from "./components/Dashboard";
 import Toolbar from "./components/Toolbar";
 import { Provider } from "react-redux";
 import store from "./store";
 import "./App.css";
-
+jest.mock("axios");
 class App extends Component {
   render() {
     return (

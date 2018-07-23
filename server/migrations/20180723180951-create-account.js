@@ -15,11 +15,11 @@ module.exports = {
         type: Sequelize.DOUBLE
       },
       userId: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.STRING,
         onDelete: "CASCADE",
         references: {
           model: "Users",
-          key: "id",
+          key: "googleId",
           as: "userId"
         }
       },

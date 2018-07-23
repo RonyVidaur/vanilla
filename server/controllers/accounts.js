@@ -6,16 +6,13 @@ module.exports = {
     return Account.create({
       name: req.body.name,
       balance: req.body.balance,
-      userId: req.user.id
+      userId: req.user.googleId
     })
       .then(account => res.status(201).send(account))
       .catch(error => res.status(400).send(error));
   },
   list(req, res) {
     return Account.findAll({
-      where: {
-        id: req.user.id
-      },
       include: [
         {
           model: Transaction,
@@ -27,7 +24,7 @@ module.exports = {
       .catch(error => res.status(400).send(error));
   },
   retrieve(req, res) {
-    return Account.findById(req.params.accountId, {
+    return Account.findById(req.user.googleId, {
       include: [
         {
           model: Transaction,

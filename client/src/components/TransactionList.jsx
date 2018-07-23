@@ -25,18 +25,34 @@ class TransactionList extends Component {
     return (
       <div style={listHolderStyle}>
         <AddTransactionModal modal={{ closeOnBlur: true }} />
-        {transactions.map(transaction => {
-          return (
-            <Transaction details={{ ...transaction }}>
-              <Button
-                className="is-small is-danger"
-                onClick={onDelete.bind(this, transaction.id)}
-              >
-                X
-              </Button>
-            </Transaction>
-          );
-        })}
+        {transactions.length ? (
+          transactions.map(transaction => {
+            return (
+              <Transaction details={{ ...transaction }}>
+                <Button
+                  className="is-small is-danger"
+                  onClick={onDelete.bind(this, transaction.id)}
+                >
+                  X
+                </Button>
+              </Transaction>
+            );
+          })
+        ) : (
+          <div
+            style={{
+              textAlign: "center",
+              paddingTop: "15%",
+              backgroundColor: "white",
+              minHeight: "400px"
+            }}
+          >
+            <h2>You haven't registered any transactions yet</h2>
+            <h1>
+              <strong>:)</strong>
+            </h1>
+          </div>
+        )}
       </div>
     );
   }

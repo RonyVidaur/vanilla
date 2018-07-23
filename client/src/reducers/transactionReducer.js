@@ -36,20 +36,6 @@ export default (state = initialState, action) => {
         ...state,
         loading: true
       };
-    case GET_TOTAL_INCOME:
-      return {
-        ...state
-        // totalIncome: state.transactions
-        //   .filter(transaction => {
-        //     return transaction.type === 1;
-        //   })
-        //   .map(element => {
-        //     return element.amount || 0;
-        //   })
-        //   .reduce((acc, currVal) => {
-        //     return acc + currVal;
-        //   }, 0)
-      };
     default:
       return state;
   }

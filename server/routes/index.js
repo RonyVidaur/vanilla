@@ -20,7 +20,7 @@ module.exports = app => {
   app.get("/api/user/accounts/", accountsController.list);
   // app.get("/api/users/:userId/account/", accountsController.list);
   app.get("/api/users", usersController.list);
-  app.get("/api/users/:userId", usersController.retrieve);
+  app.get("/api/user", usersController.retrieve);
   app.post("/api/users/:userId/accounts", accountsController.create);
   app.get(
     "/api/users/:userId/account/:accountId/transactions",
@@ -50,7 +50,7 @@ module.exports = app => {
   );
 
   app.get("/google/redirect", passport.authenticate("google"), (req, res) => {
-    res.redirect("http://facebook.com");
+    res.redirect("http://localhost:3000");
   });
 
   app.get("auth/logout", (req, res) => {});

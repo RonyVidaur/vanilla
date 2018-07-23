@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Button, Modal, Section } from "react-bulma-components/full";
 import { connect } from "react-redux";
 import { addTransaction } from "../actions/transactionActions";
+
 class AddTransactionModal extends Component {
   state = {
     show: false,
@@ -32,7 +33,7 @@ class AddTransactionModal extends Component {
         title: this.state.title,
         amount: this.state.amount,
         tag: this.state.tag,
-        accountId: 1
+        accountId: 2
       };
       this.props.addTransaction(newTransaction);
       this.close();
@@ -75,7 +76,7 @@ class AddTransactionModal extends Component {
               <Modal.Card.Title>Add a new transaction</Modal.Card.Title>
             </Modal.Card.Head>
             <Modal.Card.Body>
-              <Section style={{ backgroundColor: "white" }}>
+              <div style={{ backgroundColor: "white" }}>
                 {error}
                 <div className="field">
                   <label className="label">Title</label>
@@ -123,7 +124,7 @@ class AddTransactionModal extends Component {
                     </div>
                   </div>
                 </div>
-              </Section>
+              </div>
               <Section>
                 <Button
                   onClick={this.handleSubmit}

@@ -1,19 +1,25 @@
 import React, { Component } from "react";
 import CondensedInfo from "./CondensedInfo";
 import TransactionList from "./TransactionList";
-export default class Dashboard extends Component {
+import { connect } from "react-redux";
+import { getUserInfo } from "../actions/userActions";
+import { userInfo } from "os";
+class Dashboard extends Component {
+  componentDidMount() {
+    this.props.getUserInfo();
+  }
   state = {
-    currentDate: new Date().getDate(),
-    currentUser: { firstName: "Rony", lastName: "Vidaur" }
+    currentDate: new Date().getDate()
   };
   render() {
+    const { userInfo } = this.props.user;
     const { currentDate, currentUser } = this.state;
     return (
       <div className="dashboard">
         <div className="user-info">
           <div className="dashboard-left">
             <h1>
-              Hi <strong>{currentUser.firstName}</strong>,
+              Hi <strong>{userInfo.firstName}</strong>,
             </h1>
             <h2>See where you spend your money</h2>
           </div>
@@ -26,3 +32,9 @@ export default class Dashboard extends Component {
     );
   }
 }
+const mapStateToProps = state => ({ user: state.user });
+
+export default connect(
+  mapStateToProps,
+  { getUserInfo }
+)(Dashboard);
