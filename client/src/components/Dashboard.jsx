@@ -13,7 +13,7 @@ class Dashboard extends Component {
   };
   render() {
     const { userInfo } = this.props.user;
-    const { currentDate, currentUser } = this.state;
+    const { currentDate } = this.state;
     return (
       <div className="dashboard">
         <div className="user-info">

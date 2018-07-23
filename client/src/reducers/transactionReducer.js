@@ -2,8 +2,7 @@ import {
   GET_TRANSACTIONS,
   ADD_TRANSACTION,
   DELETE_TRANSACTION,
-  TRANSACTIONS_LOADING,
-  GET_TOTAL_INCOME
+  TRANSACTIONS_LOADING
 } from "../actions/types";
 const initialState = {
   transactions: [],

@@ -5,7 +5,7 @@ import Toolbar from "./components/Toolbar";
 import { Provider } from "react-redux";
 import store from "./store";
 import "./App.css";
-jest.mock("axios");
+
 class App extends Component {
   render() {
     return (

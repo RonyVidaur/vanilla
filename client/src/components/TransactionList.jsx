@@ -23,7 +23,7 @@ class TransactionList extends Component {
     };
     const { transactions } = this.props.transaction;
     return (
-      <div style={listHolderStyle}>
+      <div className="main" style={listHolderStyle}>
         <AddTransactionModal modal={{ closeOnBlur: true }} />
         {transactions.length ? (
           transactions.map(transaction => {
@@ -47,7 +47,9 @@ class TransactionList extends Component {
               minHeight: "400px"
             }}
           >
-            <h2>You haven't registered any transactions yet</h2>
+            <h2 className="default-text">
+              You haven't registered any transactions yet
+            </h2>
             <h1>
               <strong>:)</strong>
             </h1>
