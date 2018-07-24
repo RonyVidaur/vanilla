@@ -17,11 +17,20 @@ app.use(passport.session());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-require("./server/routes")(app);
-app.get("*", (req, res) =>
-  res.status(200).send({
-    message: "Welcome to Vanilla API"
-  })
-);
+require("./server/routes/oauth")(app);
 
+// custom middleware to check for authentication
+authCheck = (req, res, next) => {
+  !req.user
+    ? res.status(400).send({
+        message: "Invalid Credentials",
+        route: req.originalUrl,
+        method: req.method,
+        time: Date.now()
+      })
+    : next();
+};
+
+app.use(authCheck);
+require("./server/routes/index")(app);
 module.exports = app;

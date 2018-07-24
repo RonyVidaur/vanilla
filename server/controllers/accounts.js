@@ -26,7 +26,6 @@ module.exports = {
   retrieve(req, res) {
     return Account.findOne({
       where: { userId: req.user.googleId },
-
       include: [
         {
           model: Transaction,

@@ -61,30 +61,24 @@ describe("/GET", () => {
       .request(server)
       .get("/")
       .end((err, res) => {
-        res.should.have.status(200);
+        res.should.have.status(400);
         res.body.should.have.property("message").eql("Welcome to Vanilla API");
         done();
       });
   });
 
-  // it("Should get all accounts", done => {
-  //   chai
-  //     .request(server)
-  //     .get("/api/user/account")
-  //     .end((err, res) => {
-  //       should.not.exist(err);
-  //       res.should.have.status(200);
-  //       res.type.should.equal("application/json");
-  //       res.body[0].should.include.keys(
-  //         "id",
-  //         "name",
-  //         "balance",
-  //         "createdAt",
-  //         "updatedAt"
-  //       );
-  //       done();
-  //     });
-  // });
+  it("Should not get authorize access to the API if no user is found in request", done => {
+    chai
+      .request(server)
+      .get("/api/user/account")
+      .end((err, res) => {
+        should.not.exist(err);
+        res.should.have.status(400);
+        res.type.should.equal("application/json");
+        res.body.should.have.property("message").eql("Unauthorized Request");
+        done();
+      });
+  });
   // it("Should get an specific account", done => {
   //   chai
   //     .request(server)
