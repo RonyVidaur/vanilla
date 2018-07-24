@@ -24,7 +24,9 @@ module.exports = {
       .catch(error => res.status(400).send(error));
   },
   retrieve(req, res) {
-    return Account.findById(req.user.googleId, {
+    return Account.findOne({
+      where: { userId: req.user.googleId },
+
       include: [
         {
           model: Transaction,
