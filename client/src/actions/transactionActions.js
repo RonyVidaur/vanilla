@@ -9,10 +9,10 @@ import axios from "axios";
 
 export const getTransactions = () => dispatch => {
   dispatch(setItemsLoading());
-  axios.get("/api/user/accounts/").then(response => {
+  axios.get("/api/user/account/").then(response => {
     dispatch({
       type: GET_TRANSACTIONS,
-      payload: response.data[0].transactions
+      payload: response.data.transactions
     });
   });
 };
