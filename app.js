@@ -5,12 +5,17 @@ const passportConfig = require("./server/config/passport-config");
 const cookieSession = require("cookie-session");
 const keys = require("./server/config/keys");
 const passport = require("passport");
+const path = require("path");
 const app = express();
 
 app.use(logger("dev"));
 app.use(
   cookieSession({ maxAge: 24 * 60 * 60 * 1000, keys: [keys.session.cookieKey] })
 );
+
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname + "/static/index.html"));
+});
 
 app.use(passport.initialize());
 app.use(passport.session());
