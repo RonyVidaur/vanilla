@@ -1,0 +1,45 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: #aaffa9; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right,
+    #11ffbd,
+    #aaffa9
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #11ffbd,
+    #aaffa9
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.container {
+  width: 100vw;
+  height: 100vh;
+  padding: 16%;
+  text-align: center;
+}
+
+.logo {
+  width: 100px;
+  height: auto;
+}
+
+.welcome-text {
+  font-size: 24px;
+}
+
+.login-holder {
+  margin: 20px 0;
+}
+
+.google-button {
+  background: #db3236 !important;
+  border-radius: 20px !important;
+  color: #ffffff !important;
+  border-color: #db3236 !important;
+}
