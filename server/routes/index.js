@@ -17,25 +17,9 @@ module.exports = app => {
   );
 
   //API routes
-  app.get("/api/user/accounts/", accountsController.list);
-  // app.get("/api/users/:userId/account/", accountsController.list);
-  app.get("/api/users", usersController.list);
+  app.get("/api/user/account/", accountsController.retrieve);
   app.get("/api/user", usersController.retrieve);
-  app.post("/api/users/:userId/accounts", accountsController.create);
-  app.get(
-    "/api/users/:userId/account/:accountId/transactions",
-    transactionsController.list
-  );
-  app.get(
-    "/api/users/:userId/accounts/:accountId",
-    accountsController.retrieve
-  );
-  app.put("/api/users/:userId/accounts/:accountId", accountsController.update);
   app.post("/api/user/accounts/transactions", transactionsController.create);
-  app.put(
-    "/api/accounts/:accountId/transactions/:transactionId",
-    transactionsController.update
-  );
   app.delete(
     "/api/user/accounts/transactions/:transactionId",
     transactionsController.destroy
@@ -55,7 +39,7 @@ module.exports = app => {
 
   app.get("auth/logout", (req, res) => {});
 
-  app.all("/api/accounts/:accountId/transactions", (req, res) => {
+  app.all("/api/accounts/transactions", (req, res) => {
     res.status(405).send({
       message: "Method Not Allowed"
     });
