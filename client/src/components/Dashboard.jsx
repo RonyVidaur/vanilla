@@ -8,12 +8,8 @@ class Dashboard extends Component {
   componentDidMount() {
     this.props.getUserInfo();
   }
-  state = {
-    currentDate: new Date().getDate()
-  };
   render() {
     const { userInfo } = this.props.user;
-    const { currentDate } = this.state;
     return (
       <div className="dashboard">
         <div className="user-info">
@@ -25,7 +21,7 @@ class Dashboard extends Component {
           </div>
         </div>
         <div className="info-holder">
-          <CondensedInfo date={currentDate} />
+          <CondensedInfo />
         </div>
         <TransactionList />
       </div>
