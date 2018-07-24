@@ -22,9 +22,11 @@ export default class Toolbar extends Component {
           <Navbar.Menu>
             <Navbar.Container position="end">
               <Navbar.Item>
-                <Button className="is-small" color="danger">
-                  Log out
-                </Button>
+                <a href="/logout">
+                  <Button className="is-small" color="danger">
+                    Log out
+                  </Button>
+                </a>
               </Navbar.Item>
             </Navbar.Container>
           </Navbar.Menu>

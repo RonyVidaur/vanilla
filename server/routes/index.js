@@ -34,10 +34,10 @@ module.exports = app => {
   );
 
   app.get("/google/redirect", passport.authenticate("google"), (req, res) => {
-    res.redirect("http://localhost:3000");
+    res.redirect("/");
   });
 
-  app.get("auth/logout", (req, res) => {
+  app.get("/logout", (req, res) => {
     req.logout();
     res.redirect("/");
   });
