@@ -22,13 +22,8 @@ export default class Toolbar extends Component {
           <Navbar.Menu>
             <Navbar.Container position="end">
               <Navbar.Item>
-                <Button className="is-small" color="primary">
-                  Sign Up
-                </Button>
-              </Navbar.Item>
-              <Navbar.Item>
                 <Button className="is-small" color="danger">
-                  Sign In
+                  Log out
                 </Button>
               </Navbar.Item>
             </Navbar.Container>
