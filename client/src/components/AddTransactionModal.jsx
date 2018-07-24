@@ -46,7 +46,7 @@ class AddTransactionModal extends Component {
   render() {
     const { options, type } = this.state;
     const error = this.state.isShowingError ? (
-      <p className="red-text">*please fill all the fields</p>
+      <p className="red-text">*all fields are mandatory</p>
     ) : (
       ""
     );
