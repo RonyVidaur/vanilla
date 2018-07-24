@@ -2,6 +2,21 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 class CondensedInfo extends Component {
   render() {
+    const today = new Date();
+    const months = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December"
+    ];
     const { transactions } = this.props.transaction || [];
     const totalAmount = type => {
       return (
@@ -41,8 +56,8 @@ class CondensedInfo extends Component {
         </h1>
         <div className="condensed-info">
           <div className="date-holder">
-            {new Date().getDate()}
-            <p>JUL</p>
+            {today.getDate()}
+            <p>{months[today.getMonth()]}</p>
           </div>
           <div className="expense-holder">
             <p className="expense-category">INCOME</p>
