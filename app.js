@@ -7,7 +7,8 @@ const keys = require("./server/config/keys");
 const passport = require("passport");
 const path = require("path");
 const app = express();
-app.use(express.static("static"));
+app.use(express.static("./static"));
+app.use(express.static(path.join(__dirname, "build")));
 app.use(logger("dev"));
 app.use(
   cookieSession({ maxAge: 24 * 60 * 60 * 1000, keys: [keys.session.cookieKey] })
@@ -25,7 +26,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 require("./server/routes/oauth")(app);
 
 // custom middleware to check for authentication
-authCheck = (req, res, next) => {
+const authCheck = (req, res, next) => {
   !req.user
     ? res.status(400).send({
         message: "Invalid Credentials",
@@ -35,7 +36,9 @@ authCheck = (req, res, next) => {
       })
     : next();
 };
-
+app.get("/app/", authCheck, (req, res) => {
+  res.sendFile(path.join(__dirname + "/build/index.html"));
+});
 app.use(authCheck);
 require("./server/routes/index")(app);
 module.exports = app;
