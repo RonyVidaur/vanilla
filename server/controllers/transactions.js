@@ -47,8 +47,7 @@ module.exports = {
   destroy(req, res) {
     return Transaction.findOne({
       where: {
-        id: req.params.transactionId,
-        accountId: req.user.id
+        id: req.params.transactionId
       }
     })
       .then(transaction => {
