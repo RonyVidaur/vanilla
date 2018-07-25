@@ -7,7 +7,7 @@ const keys = require("./server/config/keys");
 const passport = require("passport");
 const path = require("path");
 const app = express();
-
+app.use(express.static("static"));
 app.use(logger("dev"));
 app.use(
   cookieSession({ maxAge: 24 * 60 * 60 * 1000, keys: [keys.session.cookieKey] })
