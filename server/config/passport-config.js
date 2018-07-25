@@ -4,7 +4,7 @@ const keys = require("./keys");
 const models = require("../models");
 
 passport.serializeUser((user, done) => {
-  done(null, user.googleId);
+  done(null, user.id);
 });
 
 passport.deserializeUser((id, done) => {
@@ -40,7 +40,11 @@ passport.use(
               balance: 0,
               userId: profile.id
             });
-            done(null, user);
+            models.User.findOne({ where: { googleId: profile.id } }).then(
+              retrievedUser => {
+                done(null, retrievedUser);
+              }
+            );
           } else {
             done(null, userResult);
           }
