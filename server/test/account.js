@@ -7,101 +7,113 @@ let should = chai.should();
 let expect = chai.expect;
 
 chai.use(chaiHttp);
-let testAccountId;
+const cookie =
+  "session=eyJwYXNzcG9ydCI6eyJ1c2VyIjoyfX0=; session.sig=Tkh_D1ddYnhGroHsi87N4jU2le4";
 
-// describe("accounts", () => {
-//   beforeEach(done => {
-//     Account.destroy({}, err => {
-//       done();
-//     });
-//   });
-// });
+describe("/POST an Account", () => {
+  it("Should NOT POST a transaction without all the required fields", done => {
+    let transaction = {
+      title: "KFC",
+      tag: "food",
+      type: 1
+    };
+    chai
+      .request(server)
+      .post("/api/user/accounts/transactions")
+      .set("Cookie", cookie)
+      .send(transaction)
+      .end((err, res) => {
+        res.should.have.status(400);
+        res.body.should.be.a("object");
+        res.body.errors[0].should.have
+          .property("message")
+          .eql("Transaction.amount cannot be null");
+        done();
+      });
+  });
 
-// describe("/POST an Account", () => {
-//   it("Should NOT POST an account without a name", done => {
-//     let account = {
-//       balance: 2000
-//     };
-//     chai
-//       .request(server)
-//       .post("/api/accounts")
-//       .send(account)
-//       .end((err, res) => {
-//         res.should.have.status(400);
-//         res.body.should.be.a("object");
-//         res.body.errors[0].should.have
-//           .property("message")
-//           .eql("Account.name cannot be null");
-//         done();
-//       });
-//   });
-
-//   it("Should POST an account if all data is valid", done => {
-//     let account = {
-//       name: "test account",
-//       balance: 100
-//     };
-//     chai
-//       .request(server)
-//       .post("/api/accounts")
-//       .send(account)
-//       .end((err, res) => {
-//         should.not.exist(err);
-//         res.should.have.status(201);
-//         expect(res.body).to.be.a("object");
-//         testAccountId = res.body.id;
-//         done();
-//       });
-//   });
-// });
+  // it("Should POST an account if all data is valid", done => {
+  //   let account = {
+  //     name: "test account",
+  //     balance: 100
+  //   };
+  //   chai
+  //     .request(server)
+  //     .post("/api/accounts")
+  //     .send(account)
+  //     .end((err, res) => {
+  //       should.not.exist(err);
+  //       res.should.have.status(201);
+  //       expect(res.body).to.be.a("object");
+  //       testAccountId = res.body.id;
+  //       done();
+  //     });
+  // });
+});
 
 describe("/GET", () => {
-  it("Should get welcome message on root endpoint", done => {
+  it("should serve the static login page", done => {
     chai
       .request(server)
       .get("/")
       .end((err, res) => {
-        res.should.have.status(400);
-        res.body.should.have.property("message").eql("Welcome to Vanilla API");
+        res.should.have.status(200);
+        res.type.should.equal("text/html");
         done();
       });
   });
 
-  it("Should not get authorize access to the API if no user is found in request", done => {
+  it("Should get the account of an authenticated user", done => {
     chai
       .request(server)
       .get("/api/user/account")
+      .set(
+        "Cookie",
+        "session=eyJwYXNzcG9ydCI6eyJ1c2VyIjoyfX0=; session.sig=Tkh_D1ddYnhGroHsi87N4jU2le4"
+      )
       .end((err, res) => {
         should.not.exist(err);
-        res.should.have.status(400);
+        res.should.have.status(200);
         res.type.should.equal("application/json");
-        res.body.should.have.property("message").eql("Unauthorized Request");
+        res.body.should.include.keys(
+          "id",
+          "name",
+          "balance",
+          "createdAt",
+          "updatedAt"
+        );
         done();
       });
   });
-  // it("Should get an specific account", done => {
-  //   chai
-  //     .request(server)
-  //     .get(`/api/accounts/${testAccountId}`)
-  //     .end((err, res) => {
-  //       should.not.exist(err);
-  //       res.should.have.status(200);
-  //       res.type.should.equal("application/json");
-  //       done();
-  //     });
-  // });
-  // it("Should return error on unexistent account", done => {
-  //   chai
-  //     .request(server)
-  //     .get("/api/accounts/21312")
-  //     .end((err, res) => {
-  //       res.should.have.status(404);
-  //       res.body.should.be.a("object");
-  //       expect(res.body).be.eql({ message: "Account not found" });
-  //       done();
-  //     });
+  it("Should not perform any kind on transaction on transactions url", done => {
+    chai
+      .request(server)
+      .get(`/api/accounts/transactions`)
+      .set(
+        "Cookie",
+        "session=eyJwYXNzcG9ydCI6eyJ1c2VyIjoyfX0=; session.sig=Tkh_D1ddYnhGroHsi87N4jU2le4"
+      )
+      .end((err, res) => {
+        should.not.exist(err);
+        res.should.have.status(405);
+        res.type.should.equal("application/json");
+        done();
+      });
+  });
+  it("Should return error when user is no authenticated", done => {
+    chai
+      .request(server)
+      .get("/api/user/accounts/")
+      .end((err, res) => {
+        res.should.have.status(400);
+        res.body.should.be.a("object");
+        expect(res.body)
+          .to.have.property("message")
+          .eql("Invalid Credentials");
+        done();
+      });
+  });
 });
-// });
 
 // describe("/PUT update an account", () => {
 //   it("Should update an account", done => {
