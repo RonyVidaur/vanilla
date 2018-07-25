@@ -12,7 +12,7 @@ export const getTransactions = () => dispatch => {
   axios.get("/api/user/account/").then(response => {
     dispatch({
       type: GET_TRANSACTIONS,
-      payload: response.data.transactions
+      payload: response.data
     });
   });
 };

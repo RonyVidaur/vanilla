@@ -7,7 +7,8 @@ import {
 const initialState = {
   transactions: [],
   totalIncome: 0,
-  loading: false
+  loading: false,
+  accountId: 0
 };
 
 export default (state = initialState, action) => {
@@ -15,7 +16,8 @@ export default (state = initialState, action) => {
     case GET_TRANSACTIONS:
       return {
         ...state,
-        transactions: action.payload,
+        transactions: action.payload.transactions,
+        accountId: action.payload.id,
         loading: false
       };
     case DELETE_TRANSACTION:
