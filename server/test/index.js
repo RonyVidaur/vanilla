@@ -9,11 +9,11 @@ let expect = chai.expect;
 chai.use(chaiHttp);
 let transactionId;
 // this is the dummy user known account id
-let testAccountId = 2;
+let testAccountId = 9;
 const cookie =
-  "session=eyJwYXNzcG9ydCI6eyJ1c2VyIjoyfX0=; session.sig=Tkh_D1ddYnhGroHsi87N4jU2le4";
+  "session=eyJwYXNzcG9ydCI6eyJ1c2VyIjo5fX0=; session.sig=tacE1hrslPNufp1CidN0sZORqAg";
 
-describe("/POST an Account", () => {
+describe("/POST", () => {
   it("Should NOT POST a transaction without all the required fields", done => {
     let transaction = {
       title: "KFC",
@@ -99,10 +99,7 @@ describe("/GET", () => {
     chai
       .request(server)
       .get("/api/user/account")
-      .set(
-        "Cookie",
-        "session=eyJwYXNzcG9ydCI6eyJ1c2VyIjoyfX0=; session.sig=Tkh_D1ddYnhGroHsi87N4jU2le4"
-      )
+      .set("Cookie", cookie)
       .end((err, res) => {
         should.not.exist(err);
         res.should.have.status(200);
@@ -121,10 +118,7 @@ describe("/GET", () => {
     chai
       .request(server)
       .get(`/api/accounts/transactions`)
-      .set(
-        "Cookie",
-        "session=eyJwYXNzcG9ydCI6eyJ1c2VyIjoyfX0=; session.sig=Tkh_D1ddYnhGroHsi87N4jU2le4"
-      )
+      .set("Cookie", cookie)
       .end((err, res) => {
         should.not.exist(err);
         res.should.have.status(405);
