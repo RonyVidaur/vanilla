@@ -9,7 +9,7 @@ module.exports = app => {
   );
 
   app.get("/google/redirect", passport.authenticate("google"), (req, res) => {
-    res.redirect("/app/");
+    res.redirect("/app");
   });
 
   app.get("/logout", (req, res) => {
