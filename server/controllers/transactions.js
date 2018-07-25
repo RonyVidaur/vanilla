@@ -45,7 +45,7 @@ module.exports = {
       .catch(error => res.status(400).send(error));
   },
   destroy(req, res) {
-    return Transaction.find({
+    return Transaction.findOne({
       where: {
         id: req.params.transactionId,
         accountId: req.user.id
